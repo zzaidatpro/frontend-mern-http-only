@@ -3,7 +3,7 @@ import API from '../api/axios.js';
 export const userService = {
   getAllUsers: async () => {
     try {
-      const response = await API.get('/api/auth/user/getAllUsers');
+      const response = await API.get('/auth/user/getAllUsers');
       return response.data;
     } catch (error) {
       const message =
@@ -15,7 +15,7 @@ export const userService = {
 
   deleteUser: async (id) => {
     try {
-      const response = await API.delete(`/api/auth/user/deleteAllUsers/${id}`);
+      const response = await API.delete(`/auth/user/deleteAllUsers/${id}`);
       return response.data;
     } catch (error) {
       console.error('Détails erreur API getAllUsers :', error.response);
