@@ -9,7 +9,7 @@ export default function PrivateRoute({ children }) {
     let isMounted = true;
 
     authService
-      .getMe()
+      .homePage()
       .then(() => {
         if (isMounted) setIsAuthenticated(true);
       })

@@ -13,7 +13,7 @@ export default function Navbar() {
 
   useEffect(() => {
     authService
-      .getMe()
+      .homePage()
       .then((data) => setUser(data))
       .catch(() => setUser(null));
   }, [location.pathname]);

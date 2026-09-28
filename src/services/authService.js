@@ -16,8 +16,8 @@ export const authService = {
     return response.data;
   },
 
-  getMe: async () => {
-    const response = await API.get('/auth/me'); 
+  homePage : async () => {
+    const response = await API.get('/auth/home'); 
     return response.data;
   },
 };

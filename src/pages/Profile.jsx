@@ -9,7 +9,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const data = await authService.getMe();
+        const data = await authService.homePage();
         setUser(data);
       } catch (err) {
         setError(
