@@ -17,23 +17,28 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg("");
-    setLoading(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setErrorMsg("");
+  setLoading(true);
 
-    try {
-      // credentials contient maintenant les bonnes valeurs !
-      const data = await authService.login(credentials);
-      console.log("Connexion réussie :", data);
-      navigate("/todos", { replace: true });
-    } catch (error) {
-      console.error("Erreur de connexion :", error);
-      setErrorMsg(error.response?.data?.message || "Identifiants invalides.");
-    } finally {
-      setLoading(false);
+  try {
+    const data = await authService.login(credentials);
+    const { user } = data;
+
+    // Redirection stricte
+    if (user && user.role === 'admin') {
+      navigate('/user'); // Redirige directement vers le composant AdminUsers.jsx
+    } else {
+      navigate('/todos');
     }
-  };
+  } catch (error) {
+    console.error("Erreur de connexion :", error);
+    setErrorMsg(error.response?.data?.message || "Identifiants invalides.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="max-w-md mx-auto space-y-6">
