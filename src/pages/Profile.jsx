@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { authService } from "../services/authService";
 
+
 export default function Profile() {
-  const [user, setUser] = useState({ email: "", role: "" });
+  const [user, setUser] = useState({ _id:"", email: "", role: "" });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const data = await authService.homePage();
-        setUser(data);
+        const data = await authService.getMe();
+        setUser(data.user || data);
       } catch (err) {
         setError(
           err.response?.data?.message || "Erreur lors du chargement du profil."
@@ -47,6 +48,12 @@ export default function Profile() {
 
       <div className="bg-white dark:bg-slate-900 p-5 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm space-y-4">
         <div>
+          <label className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+            ID utilisateur 
+          </label>
+          <p className="font-semibold text-slate-800 dark:text-slate-100 mt-1">
+           {user._id || user.id}
+          </p>
           <label className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
             Adresse Email
           </label>

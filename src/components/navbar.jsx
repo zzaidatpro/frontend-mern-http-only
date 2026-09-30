@@ -13,8 +13,11 @@ export default function Navbar() {
 
   useEffect(() => {
     authService
-      .homePage()
-      .then((data) => setUser(data))
+      .getMe()
+      .then((data) => {
+        const currentUser =data?.user || data;
+        setUser(currentUser);
+                      })
       .catch(() => setUser(null));
   }, [location.pathname]);
 
@@ -94,7 +97,7 @@ export default function Navbar() {
 
             {user && (
               <Link
-                to="/auth/me"
+                to="/auth/profile"
                 className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
               >
                 Profil
@@ -157,14 +160,14 @@ export default function Navbar() {
             À propos
           </Link>
 
-          {user?.role === "admin" && (
-            <Link to="/user" onClick={closeMenu} className="text-indigo-600 dark:text-indigo-400 font-semibold">
+          {user?.role?.toLowerCase() === "admin" && (
+            <Link to="/user" className="text-indigo-600 dark:text-indigo-400 font-semibold">
               Gestion Utilisateurs
             </Link>
           )}
 
           {user && (
-            <Link to="/auth/me" onClick={closeMenu} className="hover:text-indigo-600">
+            <Link to="/auth/profile" onClick={closeMenu} className="hover:text-indigo-600">
               Profil
             </Link>
           )}

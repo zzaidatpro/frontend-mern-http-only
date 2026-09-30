@@ -12,8 +12,8 @@ export const userService = {
    }
   },
 
-  getUserById : async () => {
-    try {const response = await API.get('/auth/user/getUserById/:id');
+  getUserById : async (id) => {
+    try {const response = await API.get(`/auth/user/getUserById/${id}`);
     return response.data;
     } catch(error) { 
       const message = error.response?.data?.message;

@@ -37,7 +37,7 @@ export default function App() {
 
                 {/* Route Privée - Accessible aux Clients et Admins */}
                 <Route
-                  path="/auth/me"
+                  path="/auth/profile"
                   element={
                     <PrivateRoute allowedRoles={["user", "admin"]}>
                       <Profile />
@@ -50,13 +50,14 @@ export default function App() {
                   path="/user"
                   element={
                     <PrivateRoute allowedRoles={["admin"]}>
+                      
                       <AdminUsers />
                     </PrivateRoute>
                   }
                 />
 
                 {/* Fallback */}
-                <Route path="*" element={<Navigate to="/todos" replace />} />
+                <Route path="*" element={<Navigate to="/auth/login" replace />} />
               </Routes>
             </div>
           </div>
